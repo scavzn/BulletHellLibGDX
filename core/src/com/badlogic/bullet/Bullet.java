@@ -18,10 +18,11 @@ public class Bullet extends ApplicationAdapter {
 	private SpriteBatch batch;
 	private Texture playerImage;
 	private Texture rocketImage;
+	private Texture backgroundImage;
 	private Rectangle player;
-	private Rectangle rocket;
 	private Array<Rectangle> rockets;
 	private long lastRocket;
+
 	private long score = 1; //non puo essere 0 per via di log
 	private float playerSpeed = 200f;
 	private float rocketSpeed = 300f;
@@ -66,7 +67,6 @@ public class Bullet extends ApplicationAdapter {
 	}
 	@Override
 	public void render () {
-		System.out.println(score);
 		ScreenUtils.clear(0, 0, 1, 0.1f);
 
 		batch.begin();
@@ -96,7 +96,7 @@ public class Bullet extends ApplicationAdapter {
 		if (player.y > 800 - 125)
 			player.y = 800 - 125;
 
-		if (TimeUtils.nanoTime() - lastRocket > 700000000) //1000000000
+		if (TimeUtils.nanoTime() - lastRocket > 1000000000) //1000000000
 			spawnRocket();
 
 		if (TimeUtils.nanoTime() - lastRocket > 100000000)
@@ -108,7 +108,7 @@ public class Bullet extends ApplicationAdapter {
 			if (rocket.y + 63 < 0) {
 				iter.remove();
 			}
-			if (rocket.x < player.x + 63 && rocket.x + 63 > player.x && rocket.y < player.y + 125 && rocket.y + 108 > player.y) {
+			if (rocket.x < player.x + 63 && rocket.x + 63 > player.x && rocket.y < player.y + 108 && rocket.y + 108 > player.y) {
 				reset();
 			}
 		}
